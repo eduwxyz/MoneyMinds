@@ -17,3 +17,10 @@ markdown_extensions:
 
 extra_css:
   - stylesheets/extras.css
+
+
+plugins: 
+- mkdocstrings:
+    handlers:
+      python:
+        paths: [money_minds]
