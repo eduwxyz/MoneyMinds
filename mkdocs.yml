@@ -23,4 +23,4 @@ plugins:
 - mkdocstrings:
     handlers:
       python:
-        paths: [money_minds]
+        paths: [moneyminds]
