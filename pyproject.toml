@@ -25,3 +25,14 @@ mkdocstrings-python = "^0.9.0"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+pythonpath = "."
+addopts = "--doctest-modules"
+
+
+[tool.taskipy.tasks]
+lint = "black . && isort ."
+docs = "mkdocs serve"
+test = "pytest -s -x --cov=moneyminds -vv"
+post_test = "coverage html"
