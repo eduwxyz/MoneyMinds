@@ -1,4 +1,5 @@
 import sqlite3
+
 from moneyminds.model import Carteira
 
 conn = sqlite3.connect(':memory:')

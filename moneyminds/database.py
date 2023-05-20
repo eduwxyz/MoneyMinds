@@ -1,24 +1,21 @@
-import sqlite3
+import configparser
+from pathlib import Path
 
-from moneyminds.model import Carteira
+from moneyminds import DB_WRITE_ERROR, SUCCESS
 
+DEFAULT_DB_FILE_PATH = Path.home().joinpath("." + Path.home().stem + "_moneyminds.json")
 
-conn = sqlite3.connect('moneyminds.db')
-cursor = conn.cursor()
-
-def create_table():
-    cursor.execute("""
-        CREATE TABLE IF NOT EXISTS carteira (
-            id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-            valor REAL NOT NULL,
-            categoria TEXT NOT NULL,
-            data TEXT NOT NULL,
-            descricao TEXT NOT NULL
-        );
-    """)
+def get_database_path(config_file: Path):
+    config_parser = configparser.ConfigParser()
+    config_parser.read(config_file)
+    return config_parser["General"]["database"]
 
 
-
-
-
-
+def init_database(db_path: Path):
+    try:
+        db_path.write_text("[]")
+        return SUCCESS
+    
+    except FileExistsError:
+        return DB_WRITE_ERROR
+    
